@@ -1,2 +1,2 @@
 # exfil
-A dumping ground for my exfil PS scrips
+A dumping ground for my PS scripts
