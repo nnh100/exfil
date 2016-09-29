@@ -27,7 +27,7 @@ class Module:
 
             # True if the method doesn't touch disk/is reasonably opsec safe
             # Disabled - this can be a relatively noisy module but sometimes useful
-            'OpsecSafe' : False,
+            'OpsecSafe' : True,
             
             # The minimum PowerShell version needed for the module to run
             'MinPSVersion' : '2',
