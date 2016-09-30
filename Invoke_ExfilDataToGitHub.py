@@ -30,7 +30,7 @@ class Module:
             'OpsecSafe' : True,
             
             # The minimum PowerShell version needed for the module to run
-            'MinPSVersion' : '2',
+            'MinPSVersion' : '3',
 
             # list of any references/other comments
             'Comments': [
