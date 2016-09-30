@@ -267,7 +267,7 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
         }
         Catch {
             $ErrorMessage = $_.Exception.Message;
-            Write-Host "Trying to upload file " + $file.FullName + " :" + $ErrorMessage
+            #Write-Host "Trying to upload file " + $file.FullName + " :" + $ErrorMessage
             #exit
         }
 
