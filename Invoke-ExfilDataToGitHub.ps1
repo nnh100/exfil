@@ -5,7 +5,7 @@ function Invoke-ExfilDataToGitHub
 
 .SYNOPSIS 
 Use this script to exfiltrate data and files to a GitHub account. 
-Using GitHub v3 API tutorial here 
+Using GitHub REST API v3 tutorial here 
 https://channel9.msdn.com/Blogs/trevor-powershell/Automating-the-GitHub-REST-API-Using-PowerShell
 
 
