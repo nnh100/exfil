@@ -87,7 +87,13 @@ class Module:
                 'Description'   :   'Data to write to file',
                 'Required'      :   False,
                 'Value'         :   ''
+            },
+            'Recurse' : {
+                'Description'   :   'Recursively get files in subfolders',
+                'Required'      :   False,
+                'Value'         :   "$True"
             }
+            
         }
 
         # save off a copy of the mainMenu object to access external functionality
