@@ -1,0 +1,105 @@
+
+
+    Directory: C:\Windows
+
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+d-----       16/07/2016     12:47                addins                                                                
+d-----       04/09/2016     05:48                appcompat                                                             
+d-----       01/10/2016     14:27                AppPatch                                                              
+d-----       01/10/2016     14:41                AppReadiness                                                          
+d-r---       30/09/2016     22:11                assembly                                                              
+d-----       16/07/2016     12:47                bcastdvr                                                              
+d-----       16/07/2016     12:47                Boot                                                                  
+d-----       16/07/2016     12:47                Branding                                                              
+d-----       30/09/2016     22:11                CbsTemp                                                               
+d-----       29/08/2016     15:01                CSC                                                                   
+d-----       16/07/2016     12:47                Cursors                                                               
+d-----       09/09/2016     13:17                debug                                                                 
+d-----       16/07/2016     12:47                diagnostics                                                           
+d-----       16/07/2016     15:11                DigitalLocker                                                         
+d---s-       16/07/2016     12:47                Downloaded Program Files                                              
+d-----       16/07/2016     15:11                en-US                                                                 
+d-r-s-       09/09/2016     16:42                Fonts                                                                 
+d-----       16/07/2016     12:47                GameBarPresenceWriter                                                 
+d-----       16/07/2016     12:47                Globalization                                                         
+d-----       16/07/2016     15:11                Help                                                                  
+d-----       16/07/2016     15:11                IME                                                                   
+d-r---       01/10/2016     14:27                ImmersiveControlPanel                                                 
+d-----       01/10/2016     14:44                INF                                                                   
+d-----       16/07/2016     12:47                InfusedApps                                                           
+d-----       16/07/2016     12:47                InputMethod                                                           
+d-----       16/07/2016     12:47                L2Schemas                                                             
+d-----       16/07/2016     12:47                LiveKernelReports                                                     
+d-----       04/09/2016     14:12                Logs                                                                  
+d-r-s-       16/07/2016     12:47                Media                                                                 
+d-r---       01/10/2016     15:07                Microsoft.NET                                                         
+d-----       16/07/2016     12:47                Migration                                                             
+d-r---       29/08/2016     14:59                MiracastView                                                          
+d-----       16/07/2016     12:47                ModemLogs                                                             
+d-----       09/09/2016     10:27                OCR                                                                   
+d-r---       16/07/2016     12:47                Offline Web Pages                                                     
+d-----       29/08/2016     15:00                Panther                                                               
+d-----       29/08/2016     15:37                PCHEALTH                                                              
+d-----       16/07/2016     12:47                Performance                                                           
+d-----       16/07/2016     12:47                PLA                                                                   
+d-----       10/09/2016     04:03                PolicyDefinitions                                                     
+d-----       01/10/2016     14:44                Prefetch                                                              
+d-r---       29/08/2016     14:59                PrintDialog                                                           
+d-----       01/10/2016     14:27                Provisioning                                                          
+d-----       01/10/2016     14:30                Registration                                                          
+d-----       16/07/2016     15:24                RemotePackages                                                        
+d-----       24/09/2016     08:59                rescache                                                              
+d-----       16/07/2016     12:47                Resources                                                             
+d-----       16/07/2016     12:47                SchCache                                                              
+d-----       16/07/2016     12:47                schemas                                                               
+d-----       16/07/2016     15:24                security                                                              
+d-----       29/08/2016     14:59                ServiceProfiles                                                       
+d-----       16/07/2016     15:11                servicing                                                             
+d-----       16/07/2016     12:49                Setup                                                                 
+d-----       01/10/2016     14:27                ShellExperiences                                                      
+d-----       29/08/2016     15:37                SHELLNEW                                                              
+d-----       16/07/2016     15:12                SKB                                                                   
+d-----       29/08/2016     15:12                SoftwareDistribution                                                  
+d-----       16/07/2016     12:47                Speech                                                                
+d-----       16/07/2016     12:47                Speech_OneCore                                                        
+d-----       29/08/2016     15:43                symbols                                                               
+d-----       16/07/2016     12:47                System                                                                
+d-----       01/10/2016     14:38                System32                                                              
+d-----       16/07/2016     15:26                SystemApps                                                            
+d-----       16/07/2016     12:47                SystemResources                                                       
+da----       01/10/2016     14:28                SysWOW64                                                              
+d-----       16/07/2016     12:47                TAPI                                                                  
+d-----       29/08/2016     14:59                Tasks                                                                 
+d-----       02/10/2016     00:20                Temp                                                                  
+d-----       16/07/2016     12:47                tracing                                                               
+d-----       16/07/2016     12:47                twain_32                                                              
+d-----       16/07/2016     12:47                Vss                                                                   
+d-----       16/07/2016     12:47                Web                                                                   
+d-----       01/10/2016     15:06                WinSxS                                                                
+-a----       16/07/2016     12:42          61440 bfsvc.exe                                                             
+-a--s-       01/10/2016     14:32          67584 bootstat.dat                                                          
+-a----       29/08/2016     15:00           1947 DtcInstall.log                                                        
+-a----       16/07/2016     12:43          33882 Enterprise.xml                                                        
+-a----       16/07/2016     12:42        4673304 explorer.exe                                                          
+-a----       16/07/2016     12:42         975360 HelpPane.exe                                                          
+-a----       16/07/2016     12:42          18432 hh.exe                                                                
+-a----       29/08/2016     14:59           1342 lsasetup.log                                                          
+-a----       16/07/2016     12:42          43131 mib.bin                                                               
+-a----       16/07/2016     12:43         243200 notepad.exe                                                           
+-a----       04/09/2016     07:48            142 ODBC.INI                                                              
+-a----       10/09/2016     04:05           3490 PFRO.log                                                              
+-a----       16/07/2016     12:42         320512 regedit.exe                                                           
+-a----       13/09/2016     07:48           4910 setupact.log                                                          
+-a----       29/08/2016     14:59            103 setuperr.log                                                          
+-a----       16/07/2016     12:42         130560 splwow64.exe                                                          
+-a----       16/07/2016     12:45            219 system.ini                                                            
+-a----       16/07/2016     12:43          66560 twain_32.dll                                                          
+-a----       30/09/2016     22:05            167 win.ini                                                               
+-a----       01/10/2016     15:03            275 WindowsUpdate.log                                                     
+-a----       16/07/2016     12:42          10240 winhlp32.exe                                                          
+-a----       16/07/2016     12:43         316640 WMSysPr9.prx                                                          
+-a----       16/07/2016     12:42          11264 write.exe                                                             
+
+
