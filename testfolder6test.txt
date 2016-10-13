@@ -1,0 +1,20 @@
+
+
+    Directory: C:\
+
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+d-----       04/09/2016     06:25                escw_106_sa                                                           
+d-----       24/09/2016     08:36                NCC Group Documents                                                   
+d-----       04/09/2016     14:04                NCCGroupWordAddIn_Install                                             
+d-----       16/07/2016     12:47                PerfLogs                                                              
+d-r---       10/09/2016     04:03                Program Files                                                         
+d-r---       14/09/2016     21:50                Program Files (x86)                                                   
+d-----       04/09/2016     05:49                Software                                                              
+d-----       30/09/2016     22:01                temp                                                                  
+d-r---       29/08/2016     15:03                Users                                                                 
+d-----       12/10/2016     23:15                Windows                                                               
+-a----       04/01/2016     16:32           1524 NCCGroup Root CA.cer                                                  
+
+
