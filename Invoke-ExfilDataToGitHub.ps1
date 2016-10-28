@@ -138,7 +138,7 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilDataToFile")
     }
     Catch {        
         $ErrorMessage = $_.Exception.Message;
-        #Write-Error "Trying to get file contents: " + $ErrorMessage; # remove in production
+        Write-Error "Trying to get file contents: " + $ErrorMessage; 
     }
 
    
@@ -159,7 +159,7 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilDataToFile")
         }
         catch{
             $ErrorMessage = $_.Exception.Message;
-            #Write-Error "Trying to delete file: " + $ErrorMessage; #remove in production
+            Write-Error "Trying to delete file: " + $ErrorMessage; 
         }
     } 
 
@@ -177,8 +177,8 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilDataToFile")
         }
         catch{
             $ErrorMessage = $_.Exception.Message;
-            #Write-Error "Trying to create file: " + $ErrorMessage;
-            #exit
+            Write-Error "Trying to create file: " + $ErrorMessage;
+            
         }    
 
 
@@ -239,7 +239,7 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
             }
             Catch {      
                 $ErrorMessage = $_.Exception.Message;
-                #Write-Error "Trying to get file contents: " + $ErrorMessage;
+                Write-Error "Trying to get file contents: " + $ErrorMessage;
             }
 
             # Delete the file if it already exists
@@ -256,7 +256,7 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
                 }
                 catch{
                     $ErrorMessage = $_.Exception.Message;
-                    #Write-Error "Trying to delete file: " + $ErrorMessage;
+                    Write-Error "Trying to delete file: " + $ErrorMessage;
                 }
             } 
 
@@ -280,8 +280,8 @@ if ($PsCmdlet.ParameterSetName -eq "ExfilFilesFromFilePath")
         }
         Catch {
             $ErrorMessage = $_.Exception.Message;
-            #Write-Error "Trying to upload file " + $file.FullName + " :" + $ErrorMessage
-            #exit
+            Write-Error "Trying to upload file " + $file.FullName + " :" + $ErrorMessage
+            
         }
 
     }
