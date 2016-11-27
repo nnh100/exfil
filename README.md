@@ -1,4 +1,4 @@
 # exfil
-A dumping ground for my PS scripts
+A dumping ground for my PS scripts. Yep, repo name is misleading. 
 
-Currently only script available is for copying files or creating text files to a GitHub repository
+
