@@ -2907,7 +2907,7 @@ function Invoke-GetContentFromGitHub
 
 <#
 .SYNOPSIS
-Use this script to download files from GitHub and store on disk or run in memory (uses PowerSploit's 
+Use this script to download files from GitHub and store on disk or run in memory (uses PowerSploit's Invoke-ReflectivePEInjection
  to evade antivirus)
 
 
